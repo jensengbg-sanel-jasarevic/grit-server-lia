@@ -10,6 +10,7 @@ exports.up = function(knex) {
       tbl.increments(),
       tbl.text("message")
       tbl.timestamps(true, true);
+    })
         
     .createTable("orders", tbl => { 
       tbl.increments()

@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require('cors');
 const dbQueries = require("../models/database-queries")
 
 const sketchesRouter = require("../Routes/sketch-routes")
@@ -7,6 +8,7 @@ const ordersRouter = require("../Routes/order-routes")
 
 const server = express() 
 server.use(express.json()) 
+server.use(cors());
 
 server.get("/", (req, res) => {
     res.json( { message: "Home"} )
