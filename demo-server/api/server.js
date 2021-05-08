@@ -1,5 +1,4 @@
 const express = require("express");
-const cors = require('cors');
 const dbQueries = require("../models/database-queries")
 
 const sketchesRouter = require("../Routes/sketch-routes")
@@ -8,7 +7,6 @@ const ordersRouter = require("../Routes/order-routes")
 
 const server = express() 
 server.use(express.json()) 
-server.use(cors());
 
 server.get("/", (req, res) => {
     res.json( { message: "Home"} )
@@ -34,5 +32,10 @@ server.post("/", async (req, res) => {
 server.use("/api/sketches", sketchesRouter)
 server.use("/api/drafts", draftsRouter)
 server.use("/api/orders", ordersRouter)
+
+server.use(express.static(path.join(__dirname, "/dist")));
+server.get("/", (req, res) =>
+    res.sendFile(path.join(__dirname, "/dist", "index.html"))
+);
 
 module.exports = server;
