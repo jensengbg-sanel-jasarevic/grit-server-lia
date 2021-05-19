@@ -1,5 +1,6 @@
 const express = require("express");
-const cors = require('cors');
+const path = require('path')
+
 const dbQueries = require("../models/database-queries")
 
 const sketchesRouter = require("../Routes/sketch-routes")
@@ -8,7 +9,10 @@ const ordersRouter = require("../Routes/order-routes")
 
 const server = express() 
 server.use(express.json()) 
-server.use(cors());
+server.use(express.static(path.join(__dirname, "../dist")));
+server.get("/", (req, res) =>
+    res.sendFile(path.join(__dirname, "../dist", "index.html"))
+);
 
 server.get("/", (req, res) => {
     res.json( { message: "Home"} )
@@ -16,19 +20,12 @@ server.get("/", (req, res) => {
 
 // POST record to sketches & drafts table
 server.post("/", async (req, res) => {
-    dbQueries.addSketch({
-         message: "Sketch record added for sketch table",
-     })
-    dbQueries.addSketchToDrafts({ 
-        message: "Draft record added for draft table",
-      })
-    
+    dbQueries.addSketch({ message: "Sketch record added for sketch table" })
+    dbQueries.addSketchToDrafts({ message: "Draft record added for draft table" })
      .then(lessons => { 
-         res.status(200).json(lessons) 
-     })
+         res.status(200).json(lessons) })
      .catch(error => { 
-         res.status(500).json({ message: "Unable to perform operation" })
-     });
+         res.status(500).json({ message: "Unable to perform operation" }) });
  })
 
 server.use("/api/sketches", sketchesRouter)
