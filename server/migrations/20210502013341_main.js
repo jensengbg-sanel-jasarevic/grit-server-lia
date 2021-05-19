@@ -20,6 +20,16 @@ exports.up = function(knex) {
       tbl.text("changes")
       tbl.timestamps(true, true);
     })
+
+    .createTable("clients", (tbl) => {
+      tbl.increments(); 
+      tbl.text("name", 128).notNullable();
+    })
+
+    .createTable("contacts", (tbl) => {
+      tbl.increments();
+      tbl.text("name", 128).notNullable();
+    })
   }
   
   exports.down = function(knex) {
