@@ -1,11 +1,13 @@
 const express = require("express");
 const path = require('path')
+const shortid = require('shortid');
 
 const dbQueries = require("../models/database-queries")
 
 const sketchesRouter = require("../Routes/sketch-routes")
 const draftsRouter = require("../Routes/draft-routes")
 const ordersRouter = require("../Routes/order-routes")
+const mailboxRouter = require("../Routes/mailbox-routes")
 
 const server = express() 
 server.use(express.json()) 
@@ -20,8 +22,8 @@ server.get("/", (req, res) => {
 
 // POST record to sketches & drafts table
 server.post("/", async (req, res) => {
-    dbQueries.addSketch({ message: "Sketch record added for sketch table" })
-    dbQueries.addSketchToDrafts({ message: "Draft record added for draft table" })
+    dbQueries.addSketch({ message: `Sketch record (${shortid.generate()}) added for sketch table` })
+    dbQueries.addSketchToDrafts({ message: `Draft record (${shortid.generate()}) added for draft table` })
      .then(lessons => { 
          res.status(200).json(lessons) })
      .catch(error => { 
@@ -31,5 +33,6 @@ server.post("/", async (req, res) => {
 server.use("/api/sketches", sketchesRouter)
 server.use("/api/drafts", draftsRouter)
 server.use("/api/orders", ordersRouter)
+server.use("/api/mailbox", mailboxRouter)
 
 module.exports = server;

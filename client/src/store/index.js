@@ -24,17 +24,14 @@ export default new Vuex.Store({
   actions: {
     async getSketches({ commit }){
       let resp = await axios.get(`/api/sketches`);
-      console.log("Database: SKETCHES", resp) 
       commit('setSketches', resp.data)
     },
     async getDrafts({ commit }){
       let resp = await axios.get(`/api/drafts`);
-      console.log("Database: DRAFTS", resp) 
       commit('setDrafts', resp.data)
     },
     async getOrders({ commit }){
       let resp = await axios.get(`/api/orders`);
-      console.log("Database: ORDERS", resp) 
       commit('setOrders', resp.data)
     },
     async postSketchDraft(){

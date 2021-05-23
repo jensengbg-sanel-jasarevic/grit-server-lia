@@ -11,8 +11,18 @@ module.exports = {
     findDraft,
     removeDraft,
     addDraftToOrders,
-    getOrders
+    getOrders,
+    addToMailbox,
+    getMailbox
 };
+
+function getMailbox() {
+    return db("mailbox")
+}
+
+async function addToMailbox(order) {
+    return await db("mailbox").insert(order, ['id'])
+}
 
 async function addSketch(sketch) {
     return await db("sketches").insert(sketch, ['id'])

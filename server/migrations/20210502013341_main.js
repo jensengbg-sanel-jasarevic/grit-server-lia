@@ -18,6 +18,15 @@ exports.up = function(knex) {
       tbl.increments()
       tbl.text("message")
       tbl.text("changes")
+      tbl.text("confirmation")
+      tbl.timestamps(true, true);
+    })
+
+    .createTable("mailbox", (tbl) => {
+      tbl.increments(); 
+      tbl.text("message")
+      tbl.text("changes")
+      tbl.text("confirmation")
       tbl.timestamps(true, true);
     })
 
