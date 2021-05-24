@@ -14,14 +14,14 @@
   
     <form @submit.prevent="deleteDraft">
       <input class="deleteDraft" type="number" placeholder="Draft ID to delete">
-    <button class="deleteBtn">DELETE Draft</button> 
+    <button type="submit" class="deleteBtn">DELETE Draft</button> 
     </form>
     <DraftsList v-for="draft in drafts" :key="draft.message" :draft="draft" />
     <br>
 
     <form @submit.prevent="postOrder">
       <input class="postOrder" type="number" placeholder="Draft ID to order">
-    <button>POST Order</button> 
+    <button type="submit">POST Order</button> 
     <OrdersList v-for="order in orders" :key="order.message" :order="order" />
     </form>
   
