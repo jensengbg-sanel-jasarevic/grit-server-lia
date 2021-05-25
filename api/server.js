@@ -1,6 +1,7 @@
 const express = require("express");
 // const path = require('path')
 const shortid = require('shortid');
+const cors = require('cors')
 
 const dbQueries = require("../models/database-queries")
 
@@ -11,6 +12,8 @@ const mailboxRouter = require("../Routes/mailbox-routes")
 
 const server = express() 
 server.use(express.json()) 
+server.use(cors())
+
 /*
 server.use(express.static(path.join(__dirname, "../dist")));
 
