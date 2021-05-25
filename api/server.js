@@ -1,5 +1,5 @@
 const express = require("express");
-const path = require('path')
+// const path = require('path')
 const shortid = require('shortid');
 
 const dbQueries = require("../models/database-queries")
@@ -11,11 +11,13 @@ const mailboxRouter = require("../Routes/mailbox-routes")
 
 const server = express() 
 server.use(express.json()) 
+/*
 server.use(express.static(path.join(__dirname, "../dist")));
+
 server.get("/", (req, res) =>
     res.sendFile(path.join(__dirname, "../dist", "index.html"))
 );
-
+*/
 server.get("/", (req, res) => {
     res.json( { message: "Home"} )
 });
