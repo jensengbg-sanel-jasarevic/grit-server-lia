@@ -36,8 +36,8 @@ function getSketches() {
     return db("sketches")
 }
 
-function updateDraft(id, comment) {
-    return db("drafts")
+async function updateDraft(id, comment) {
+    return await db("drafts")
         .where({ id })
         .update(comment)
         .then(() => {  // Returns the object with id

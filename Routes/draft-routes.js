@@ -49,7 +49,7 @@ router.delete("/:id", (req, res) => {
 
 // POST comment for a draft
 router.post("/:id", async (req, res) => {
-    dbQueries.updateDraft(req.params.id, req.body)
+    await dbQueries.updateDraft(req.params.id, req.body)
 
     .then(updated => {    
         if (updated) {
