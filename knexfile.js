@@ -2,7 +2,7 @@ module.exports = {
   
     development: {
       client: 'sqlite3', 
-      useNullAsDefault: true, // Gets rid of bunch of bugs just for sqlite
+      useNullAsDefault: true, // Gets rid of bunch of bugs just for sqlite.
       connection: {
         // Our database. Type what name file should have when running -> knex migrate:latest
         filename: "./data/main.db3",
