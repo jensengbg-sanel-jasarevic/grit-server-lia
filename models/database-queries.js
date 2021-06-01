@@ -6,7 +6,7 @@ module.exports = {
     addSketchToDrafts,
     getSketches,
     findSketch,
-    updateSketch,
+    updateDraft,
     getDrafts,
     findDraft,
     removeDraft,
@@ -36,12 +36,12 @@ function getSketches() {
     return db("sketches")
 }
 
-function updateSketch(id, changes) {
-    return db("sketches")
+function updateDraft(id, comment) {
+    return db("drafts")
         .where({ id })
-        .update(changes)
+        .update(comment)
         .then(() => {  // Returns the object with id
-            return findSketch(id);
+            return findDraft(id);
         });
 }
 

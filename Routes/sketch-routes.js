@@ -15,22 +15,4 @@ router.get("/", async (req, res) => {
     });
 })
 
-// PATCH update/change sketch
-router.patch("/:id", (req, res) => {
-    let id = parseInt(req.params.id);
-    const changes = req.body;
-    
-    dbQueries.updateSketch(id, changes)
-    .then(updated => { 
-        if (updated) {
-            res.status(200).json(updated)
-        } else { 
-            res.status(404).json({ message: "Record not found" });
-        }
-    })
-    .catch(error => {
-        res.status(500).json({ message: "Unable to perform operation" });
-    });
-});
-
 module.exports = router;

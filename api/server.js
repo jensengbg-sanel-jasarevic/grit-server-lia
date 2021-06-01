@@ -14,21 +14,15 @@ const server = express()
 server.use(express.json()) 
 server.use(cors())
 
-/*
-server.use(express.static(path.join(__dirname, "../dist")));
-
-server.get("/", (req, res) =>
-    res.sendFile(path.join(__dirname, "../dist", "index.html"))
-);
-*/
 server.get("/", (req, res) => {
     res.json( { message: "Home"} )
 });
 
 // POST record to sketches & drafts table
 server.post("/", async (req, res) => {
-    dbQueries.addSketch({ message: `Sketch record (${shortid.generate()}) added for sketch table` })
-    dbQueries.addSketchToDrafts({ message: `Draft record (${shortid.generate()}) added for draft table` })
+    const sketchID = shortid.generate()
+    dbQueries.addSketch({ message: `Sketch record (${sketchID}) added for sketch table` })
+    dbQueries.addSketchToDrafts({ message: `Sketch (${sketchID}) record added to draft table` })
      .then(lessons => { 
          res.status(200).json(lessons) })
      .catch(error => { 

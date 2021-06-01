@@ -10,14 +10,14 @@ exports.up = function(knex) {
     .createTable("drafts", tbl => { 
       tbl.increments()
       tbl.text("message")
-      tbl.text("changes")
+      tbl.text("comment")
       tbl.timestamps(true, true);
     })
         
     .createTable("orders", tbl => { 
       tbl.increments()
       tbl.text("message")
-      tbl.text("changes")
+      tbl.text("comment")
       tbl.text("confirmation")
       tbl.timestamps(true, true);
     })
@@ -25,7 +25,7 @@ exports.up = function(knex) {
     .createTable("mailbox", (tbl) => {
       tbl.increments(); 
       tbl.text("message")
-      tbl.text("changes")
+      tbl.text("comment")
       tbl.text("confirmation")
       tbl.timestamps(true, true);
     })
