@@ -14,7 +14,7 @@ module.exports = {
     getOrders,
     addToContactsMailbox,
     addToClientsMailbox,
-    getMailbox
+    getContactsMailbox
 };
 
 function getContactsMailbox() {
