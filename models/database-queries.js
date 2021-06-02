@@ -17,8 +17,8 @@ module.exports = {
     getMailbox
 };
 
-function getMailbox() {
-    return db("mailbox")
+function getContactsMailbox() {
+    return db("contacts")
 }
 
 async function addToContactsMailbox(order) {
