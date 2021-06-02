@@ -24,7 +24,6 @@ exports.up = function(knex) {
 
     .createTable("clients", (tbl) => {
       tbl.increments(); 
-      tbl.text("name", 128).notNullable();
       tbl.text("comment")
       tbl.text("message")
       tbl.text("confirmation")
@@ -33,7 +32,6 @@ exports.up = function(knex) {
 
     .createTable("contacts", (tbl) => {
       tbl.increments();
-      tbl.text("name", 128).notNullable();
       tbl.text("comment")
       tbl.text("message")
       tbl.text("confirmation")

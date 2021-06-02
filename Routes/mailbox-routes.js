@@ -5,7 +5,7 @@ const router = express.Router()
 
 // GET mailbox
 router.get("/", (req, res) => {
-    dbQueries.getMailbox()
+    dbQueries.getContactsMailbox()
     
     .then(mailbox => { 
         res.status(200).json(mailbox)
@@ -17,7 +17,7 @@ router.get("/", (req, res) => {
 
 // GET mailbox user
 router.get("/user", (req, res) => {
-    dbQueries.getMailbox()
+    dbQueries.getClientsMailbox()
     
     .then(mailbox => { 
         res.status(200).json(mailbox)

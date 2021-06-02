@@ -14,11 +14,16 @@ module.exports = {
     getOrders,
     addToContactsMailbox,
     addToClientsMailbox,
-    getContactsMailbox
+    getContactsMailbox,
+    getClientsMailbox
 };
 
 function getContactsMailbox() {
     return db("contacts")
+}
+
+function getClientsMailbox() {
+    return db("clients")
 }
 
 async function addToContactsMailbox(order) {
