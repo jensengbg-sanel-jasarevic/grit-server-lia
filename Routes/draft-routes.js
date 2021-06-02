@@ -53,7 +53,7 @@ router.post("/:id", async (req, res) => {
 
     .then(updated => {    
         if (updated) {
-            dbQueries.addToMailbox(updated)
+            dbQueries.addToContactsMailbox(updated)
             res.status(200).json(updated)
         } else { 
             res.status(404).json({ message: "Record not found" });

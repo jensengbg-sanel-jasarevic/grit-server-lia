@@ -22,22 +22,22 @@ exports.up = function(knex) {
       tbl.timestamps(true, true);
     })
 
-    .createTable("mailbox", (tbl) => {
-      tbl.increments(); 
-      tbl.text("message")
-      tbl.text("comment")
-      tbl.text("confirmation")
-      tbl.timestamps(true, true);
-    })
-
     .createTable("clients", (tbl) => {
       tbl.increments(); 
       tbl.text("name", 128).notNullable();
+      tbl.text("comment")
+      tbl.text("message")
+      tbl.text("confirmation")
+      tbl.timestamps(true, true);
     })
 
     .createTable("contacts", (tbl) => {
       tbl.increments();
       tbl.text("name", 128).notNullable();
+      tbl.text("comment")
+      tbl.text("message")
+      tbl.text("confirmation")
+      tbl.timestamps(true, true);
     })
   }
   

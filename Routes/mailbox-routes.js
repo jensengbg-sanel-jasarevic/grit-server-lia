@@ -27,4 +27,15 @@ router.get("/user", (req, res) => {
     });
 });
 
+// POST client mailbox
+router.post("/", async (req, res) => {
+    dbQueries.addToClientsMailbox(updated)
+    dbQueries.addSketch({ message: `Sketch record (${sketchID}) added for sketch table` })
+    dbQueries.addSketchToDrafts({ message: `Sketch (${sketchID}) record added to draft table` })
+     .then(lessons => { 
+         res.status(200).json(lessons) })
+     .catch(error => { 
+         res.status(500).json({ message: "Unable to perform operation" }) });
+ })
+
 module.exports = router;
