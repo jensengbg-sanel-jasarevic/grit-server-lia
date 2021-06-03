@@ -24,9 +24,7 @@ exports.up = function(knex) {
 
     .createTable("clients", (tbl) => {
       tbl.increments(); 
-      tbl.text("comment")
-      tbl.text("message")
-      tbl.text("confirmation")
+      tbl.text("messages")
       tbl.timestamps(true, true);
     })
 

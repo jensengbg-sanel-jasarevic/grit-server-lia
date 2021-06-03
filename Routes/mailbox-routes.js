@@ -28,14 +28,15 @@ router.get("/user", (req, res) => {
 });
 
 // POST client mailbox
-router.post("/", async (req, res) => {
-    dbQueries.addToClientsMailbox(updated)
-    dbQueries.addSketch({ message: `Sketch record (${sketchID}) added for sketch table` })
-    dbQueries.addSketchToDrafts({ message: `Sketch (${sketchID}) record added to draft table` })
-     .then(lessons => { 
-         res.status(200).json(lessons) })
+router.post("/user/:id", async (req, res) => {
+    const changes = req.body;
+console.log("changes", changes)
+    dbQueries.addToClientsMailbox({ message: `Sketch record added to draft table` })
+     .then(data => { 
+         res.status(200).json(data)
+        })
      .catch(error => { 
-         res.status(500).json({ message: "Unable to perform operation" }) });
+         res.status(500).json({ message: "Unable to add message" }) });
  })
 
 module.exports = router;

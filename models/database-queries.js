@@ -30,8 +30,8 @@ async function addToContactsMailbox(order) {
     return await db("contacts").insert(order, ['id'])
 }
 
-async function addToClientsMailbox(order) {
-    return await db("clients").insert(order, ['id'])
+async function addToClientsMailbox(message) {
+    return await db("clients").insert(message, ['id'])
 }
 
 async function addSketch(sketch) {
