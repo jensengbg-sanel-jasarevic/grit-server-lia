@@ -28,7 +28,7 @@ router.get("/user", (req, res) => {
 });
 
 // POST client mailbox
-router.post("/user/:id", async (req, res) => {
+router.post("/user", async (req, res) => {
     const changes = req.body;
 console.log("changes", changes)
     dbQueries.addToClientsMailbox({ message: `Sketch record added to draft table` })
