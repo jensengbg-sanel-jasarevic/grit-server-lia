@@ -1,7 +1,7 @@
 exports.up = function(knex) {
     return knex.schema
     .createTable("sketches", tbl => { // Callback function to modify the table's structure, using the schema-building commands
-      tbl.increments('id')
+      tbl.increments()
       tbl.text("message")
       tbl.text("changes")
       tbl.timestamps(true, true) 
@@ -18,7 +18,6 @@ exports.up = function(knex) {
       tbl.increments()
       tbl.text("message")
       tbl.text("comment")
-      tbl.text("confirmation")
       tbl.timestamps(true, true);
     })
 
@@ -31,8 +30,7 @@ exports.up = function(knex) {
     .createTable("contacts", (tbl) => {
       tbl.increments();
       tbl.text("comment")
-      tbl.text("message")
-      tbl.text("confirmation")
+      tbl.text("messages")
       tbl.timestamps(true, true);
     })
   }

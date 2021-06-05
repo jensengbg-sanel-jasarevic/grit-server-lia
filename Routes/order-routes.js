@@ -9,7 +9,6 @@ router.post("/:id", async (req, res) => {
     
     .then(order => {    
         order.message = `Draft record added to order table`
-        order.confirmation = "Order confirmed"
         dbQueries.addDraftToOrders(order)
         res.status(201).json(order)
         })

@@ -3,7 +3,7 @@ const dbQueries = require("../models/database-queries")
 
 const router = express.Router() 
 
-// GET mailbox
+// GET contacts mailbox
 router.get("/", (req, res) => {
     dbQueries.getContactsMailbox()
     
@@ -15,8 +15,8 @@ router.get("/", (req, res) => {
     });
 });
 
-// GET mailbox user
-router.get("/user", (req, res) => {
+// GET mailbox client
+router.get("/client", (req, res) => {
     dbQueries.getClientsMailbox()
     
     .then(mailbox => { 
@@ -27,11 +27,19 @@ router.get("/user", (req, res) => {
     });
 });
 
-// POST client mailbox
-router.post("/user", async (req, res) => {
-    const changes = req.body;
-console.log("changes", changes)
-    dbQueries.addToClientsMailbox({ message: `Sketch record added to draft table` })
+// POST to client mailbox
+router.post("/client", async (req, res) => {
+    dbQueries.addToClientsMailbox({ messages: `${req.body.response}` })
+     .then(data => { 
+         res.status(200).json(data)
+        })
+     .catch(error => { 
+         res.status(500).json({ message: "Unable to add message" }) });
+ })
+
+ // POST to contacts mailbox
+router.post("/contacts", async (req, res) => {
+    dbQueries.addToContactsMailbox({ messages: `${req.body.response}` })
      .then(data => { 
          res.status(200).json(data)
         })
