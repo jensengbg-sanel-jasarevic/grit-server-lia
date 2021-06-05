@@ -47,21 +47,4 @@ router.delete("/:id", (req, res) => {
     });
 });
 
-// POST comment for a draft
-router.post("/:id", async (req, res) => {
-    await dbQueries.updateDraft(req.params.id, req.body)
-
-    .then(updated => {    
-        if (updated) {
-            dbQueries.addToContactsMailbox(updated)
-            res.status(200).json(updated)
-        } else { 
-            res.status(404).json({ message: "Record not found" });
-        }
-    })
-    .catch(error => {
-        res.status(500).json({ message: "Unable to perform operation" });
-    });
-});        
-
 module.exports = router;
