@@ -22,12 +22,14 @@ exports.up = function(knex) {
     .createTable("clients", (tbl) => {
       tbl.increments(); 
       tbl.text("messages")
+      tbl.integer("messagesId")
       tbl.timestamps(true, true);
     })
 
     .createTable("contacts", (tbl) => {
       tbl.increments();
       tbl.text("messages")
+      tbl.integer("messagesId")
       tbl.timestamps(true, true);
     })
   }

@@ -4,7 +4,7 @@ const dbQueries = require("../models/database-queries")
 const router = express.Router() 
 
 // GET contacts mailbox
-router.get("/", (req, res) => {
+router.get("/contacts", (req, res) => {
     dbQueries.getContactsMailbox()
     
     .then(mailbox => { 
@@ -15,7 +15,18 @@ router.get("/", (req, res) => {
     });
 });
 
-// GET mailbox client
+ // POST to contacts mailbox
+ router.post("/contacts", async (req, res) => {
+    dbQueries.addToContactsMailbox({ messages: `${req.body.text}`, messagesId: `${req.body.textId}` })
+    
+    .then(data => { 
+         res.status(200).json(data)
+        })
+     .catch(error => { 
+         res.status(500).json({ message: "Unable to add message" }) });
+ })
+
+// GET client mailbox 
 router.get("/client", (req, res) => {
     dbQueries.getClientsMailbox()
     
@@ -27,19 +38,10 @@ router.get("/client", (req, res) => {
     });
 });
 
-// POST to client mailbox
+// POST to clients mailbox
 router.post("/client", async (req, res) => {
-    dbQueries.addToClientsMailbox({ messages: `${req.body.response}` })
-     .then(data => { 
-         res.status(200).json(data)
-        })
-     .catch(error => { 
-         res.status(500).json({ message: "Unable to add message" }) });
- })
+    dbQueries.addToClientsMailbox({ messages: `${req.body.text}`, messagesId: `${req.body.textId}` })
 
- // POST to contacts mailbox
-router.post("/contacts", async (req, res) => {
-    dbQueries.addToContactsMailbox({ messages: `${req.body.response}` })
      .then(data => { 
          res.status(200).json(data)
         })
