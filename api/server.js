@@ -2,7 +2,7 @@ const express = require("express");
 const shortid = require('shortid');
 const cors = require('cors')
 
-const dbQueries = require("../models/database-queries")
+const dbQueries = require("../model/database-queries")
 
 const sketchesRouter = require("../Routes/sketch-routes")
 const draftsRouter = require("../Routes/draft-routes")
@@ -21,10 +21,20 @@ server.get("/", (req, res) => {
 // POST record to sketches & drafts table
 server.post("/", async (req, res) => {
     const sketchID = shortid.generate()
+
     dbQueries.addSketch({ message: `Sketch record (${sketchID}) added for sketch table` })
+    .then(response => { 
+    console.log(response)
+    })
+    .catch(error => { 
+        console.error(error);
+    })
+
     dbQueries.addSketchToDrafts({ message: `Sketch (${sketchID}) record added to draft table` })
-     .then(lessons => { 
-         res.status(200).json(lessons) })
+     .then(response => { 
+         console.log(response)
+         res.status(200).json(response) 
+    })
      .catch(error => { 
          res.status(500).json({ message: "Unable to perform operation" }) });
  })

@@ -1,5 +1,5 @@
 const express = require ("express");
-const dbQueries = require("../models/database-queries")
+const dbQueries = require("../model/database-queries")
 
 const router = express.Router() 
 

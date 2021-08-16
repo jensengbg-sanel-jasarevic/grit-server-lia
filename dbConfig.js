@@ -1,7 +1,9 @@
-// Middlefile, interacts with knexfile
 const dbEngine = process.env.DB_ENVIRONMENT || "development";
 
-// Property accessors provide access to an object's properties by using the dot notation or the bracket notation
-const config = require("./knexfile")[dbEngine]; // Bracket notation can take strings
+// Property accessors provide access to an object's properties by using the dot notation or the bracket notation.
+// Syntax: object.property or object['property']
+const config = require("./knexfile")[dbEngine]; // Get 'production' or 'development' object. Object's keys = properties (e.g. client, connection, pool).
 
-module.exports = require("knex")(config); // Use database client that is being assigned to config variable, function knex(config) 
+module.exports = require("knex")(config); // Passing variable 'config' as argument to 'knex' module.  
+// Knex module now configurated to know which database management system to use.
+// When importing this file (dbConfig.js) anywhere in project it will now handle all configurations regarding which database management system app should use.  

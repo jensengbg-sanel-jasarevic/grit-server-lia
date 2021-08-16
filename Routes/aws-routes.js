@@ -7,7 +7,7 @@ const multer = require("multer")
 const AWS = require("aws-sdk") // Software development kit for start using any services for Amazon Web Services.
 const { v4: uuidv4 } = require('uuid');
 
-const dbQueries = require("../models/database-queries")
+const dbQueries = require("../model/database-queries")
 const router = express.Router() 
 
 // Creating an instance of an object that has a constructor function.
