@@ -1,5 +1,5 @@
 // Database modeling
-const db = require("../dbConfig") // Which database being used
+const db = require("../dbConfig") 
 
 module.exports = {
     addSketch,

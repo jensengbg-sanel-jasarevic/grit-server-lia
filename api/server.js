@@ -4,6 +4,7 @@ const cors = require('cors')
 
 const dbQueries = require("../model/database-queries")
 
+const homeRouter = require("../Routes/home-routes")
 const sketchesRouter = require("../Routes/sketch-routes")
 const draftsRouter = require("../Routes/draft-routes")
 const ordersRouter = require("../Routes/order-routes")
@@ -39,6 +40,7 @@ server.post("/", async (req, res) => {
          res.status(500).json({ message: "Unable to perform operation" }) });
  })
 
+server.use("/", homeRouter)
 server.use("/api/sketches", sketchesRouter)
 server.use("/api/drafts", draftsRouter)
 server.use("/api/orders", ordersRouter)
