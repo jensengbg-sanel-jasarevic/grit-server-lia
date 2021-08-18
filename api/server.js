@@ -14,11 +14,11 @@ const awsRouter = require("../Routes/aws-routes")
 const server = express() 
 server.use(express.json()) 
 server.use(cors())
-
+/*
 server.get("/", (req, res) => {
     res.json( { message: "Home"} )
 });
-
+*/
 // POST record to sketches & drafts table
 server.post("/", async (req, res) => {
     const sketchID = shortid.generate()
