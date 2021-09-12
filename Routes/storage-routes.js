@@ -10,10 +10,13 @@ const { v4: uuidv4 } = require('uuid');
 const dbQueries = require("../model/database-queries")
 const router = express.Router() 
 
+const spacesEndpoint = new AWS.Endpoint('ams3.digitaloceanspaces.com');
+
 // Creating an instance of an object that has a constructor function.
-const s3 = new AWS.S3({ // Initialization for S3. Requests two keys that we will pass our credentials to, accessKeyId & secretAccessKey.
-    accessKeyId: process.env.AWS_ID,
-    secretAccessKey: process.env.AWS_SECRET
+const s3 = new AWS.S3({ // Initialization for S3. Passing the credentials.
+    endpoint: spacesEndpoint,
+    accessKeyId: process.env.ACCESS_KEY_ID,
+    secretAccessKey: process.env.SECRET_ACCESS_KEY
 })
 
 const storage = multer.memoryStorage() // Storage option for Multer.
@@ -28,11 +31,12 @@ router.post("/", upload, (req, res) => {
     let myFile = req.file.originalname.split(".")  // Split into array of substrings.
     const fileType = myFile[myFile.length - 1]
 
-    const params = { // Configuration AWS Bucket.
-        Bucket: process.env.AWS_BUCKET_NAME,
+    const params = { // Configuration for uploading file to Bucket.
+        Bucket: process.env.BUCKET_NAME,
         Key: `${uuidv4()}.${fileType}`,
         Body: req.file.buffer
     }
+
     /*
     // S3 upload function
     s3.upload(params, (error, data) => {
@@ -42,6 +46,20 @@ router.post("/", upload, (req, res) => {
         res.status(200).send(data)
     })
     */
+})
+
+// GET list of all 'Spaces'
+router.get("/", (req, res) => {
+    s3.listBuckets({}, function(error, data) {
+        if (error) {
+        res.status(500).send(error)
+        } else {
+            data['Buckets'].forEach(function(space) {
+                console.log(space['Name']);
+                res.status(200).send(data)
+            })
+        };
+    });
 })
 
 module.exports = router;
