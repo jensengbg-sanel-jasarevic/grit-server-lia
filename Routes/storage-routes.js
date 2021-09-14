@@ -48,6 +48,29 @@ router.post("/", upload, (req, res) => {
     */
 })
 
+// GET list of all files in a 'Space'
+router.get("/:space", (req, res) => {
+    let params = {
+        Bucket: process.env.BUCKET_NAME
+    };
+
+    s3.listObjectsV2(params, function (error, data) {
+            if (!error) {
+                let files = []
+                // Get Contents array from response data object.
+                data.Contents.forEach(function (element) {
+                // Inside every item in the array get the file & push to 'files' array.
+                    files.push({
+                        filename: element.Key
+                    });
+                });
+                res.status(200).send(files)
+            } else {
+                res.status(500).send(error)
+            }
+        });
+})
+
 // GET list of all 'Spaces'
 router.get("/", (req, res) => {
     s3.listBuckets({}, function(error, data) {
@@ -56,8 +79,8 @@ router.get("/", (req, res) => {
         } else {
             data['Buckets'].forEach(function(space) {
                 console.log(space['Name']);
-                res.status(200).send(data)
             })
+            res.status(200).send(data)
         };
     });
 })
