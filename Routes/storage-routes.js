@@ -35,17 +35,14 @@ router.post("/", upload, (req, res) => {
         Bucket: process.env.BUCKET_NAME,
         Key: `${uuidv4()}.${fileType}`,
         Body: req.file.buffer
-    }
+    };
 
-    /*
-    // S3 upload function
     s3.upload(params, (error, data) => {
         if(error){
             res.status(500).send(error)
         }
         res.status(200).send(data)
     })
-    */
 })
 
 // GET list of all files in a 'Space'
