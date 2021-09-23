@@ -12,19 +12,21 @@ exports.up = function(knex) {
       // One column that most tables have is a primary key column. This column is used to keep the record id, and it usually contains an auto incremented integer.
       tbl.increments() // Here's how we create a primary key column named 'id' that will be incremented each time a record is created:
       tbl.text("message")
-      tbl.text("changes")
+      tbl.text("filename")
       tbl.timestamps(true, true) 
     })
 
     .createTable("drafts", tbl => { 
       tbl.increments()
       tbl.text("message")
+      tbl.text("filename")
       tbl.timestamps(true, true);
     })
         
     .createTable("orders", tbl => { 
       tbl.increments()
       tbl.text("message")
+      tbl.text("filename")
       tbl.timestamps(true, true);
     })
 

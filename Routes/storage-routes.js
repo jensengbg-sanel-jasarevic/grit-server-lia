@@ -32,14 +32,15 @@ router.post("/", upload, (req, res) => {
     const sketchID = shortid.generate()
     let myFile = req.file.originalname.split(".") // Split into array of substrings.
     const fileType = myFile[myFile.length - 1]
-    
+    console.log(myFile)
+  /*  
     const params = { // Configuration for uploading file to Bucket.
         Bucket: process.env.BUCKET_NAME,
         Key: `${myFile[0]}.${fileType}`,
         Body: req.file.buffer
     };
-
-    dbQueries.addSketch({ message: `Sketch record (${sketchID}) added for sketch table` })
+*/
+    dbQueries.addSketch({ message: `Sketch record (${sketchID}) added for sketch table`, filename: `${req.file.originalname}` })
     .then(response => { 
     console.log(response)
     })
@@ -47,21 +48,21 @@ router.post("/", upload, (req, res) => {
         console.error(error);
     })
 
-    dbQueries.addSketchToDrafts({ message: `Sketch (${sketchID}) record added to draft table` })
+    dbQueries.addSketchToDrafts({ message: `Sketch (${sketchID}) record added to draft table`, filename: `${req.file.originalname}` })
     .then(response => { 
         console.log(response)
     })
     .catch(error => { 
         console.error(error);
     })
-
+/*
     s3.upload(params, (error, data) => {
         if(error){
             res.status(500).send(error)
         } else {
         res.status(200).send(data)
         }
-    })
+    })*/
 })
 
 // GET a file from Space (download).
