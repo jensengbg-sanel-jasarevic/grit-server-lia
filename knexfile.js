@@ -6,7 +6,7 @@ module.exports = {
       connection: {
         // We first define a database connection and a migrations directory.
         // Generate a migration file invoking the 'knex migrate:make'. Schema builder will be in this file. All tables should be defined there.
-        // Run 'knex migrate:latest' to drop our schema builder with tables (database) to directory defined below. 
+        // Run 'npx knex migrate:latest' to drop our schema builder with tables (database) to directory defined below. 
         filename: "./data/main.db3", // SQLite can have extension '.db3' or '.sqlite3'. 
         // This is now the file with the database.
       },

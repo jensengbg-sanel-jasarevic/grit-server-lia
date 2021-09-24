@@ -33,6 +33,8 @@ router.get("/:id", (req, res) => {
 
 // DELETE specific draft
 router.delete("/:id", (req, res) => {
+    console.log(req.params.id)
+    
     dbQueries.removeDraft(parseInt(req.params.id))
 
     .then(count => { 
