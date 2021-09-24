@@ -67,7 +67,7 @@ router.post("/", upload, (req, res) => {
 // GET a file from Space (download).
 router.get("/space/:filename", (req, res) => {
     let params = {
-        Bucket: "match",
+        Bucket: process.env.BUCKET_NAME,
         Key: req.params.filename
     };
     
