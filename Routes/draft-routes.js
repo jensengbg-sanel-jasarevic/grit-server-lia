@@ -32,14 +32,12 @@ router.get("/:id", (req, res) => {
 });
 
 // DELETE specific draft
-router.delete("/:id", (req, res) => {
-    console.log(req.params.id)
-    
-    dbQueries.removeDraft(parseInt(req.params.id))
+router.delete("/", (req, res) => {  
+    dbQueries.removeDraft(req.body.id)
 
     .then(count => { 
-        if (count > 0) { // Knex del() returns number of affected rows deleted
-            res.status(200).json({ message: "Draft successfully deleted" });
+        if (count > 0) { // Knex del() returns number of affected rows deleted.
+            res.status(200).json({ message: "Draft successfully deleted", filename: req.body.filename, id: req.body.id });
         } else { 
             res.status(404).json({ message: "Record not found" });
         }

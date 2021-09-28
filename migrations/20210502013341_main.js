@@ -34,6 +34,7 @@ exports.up = function(knex) {
       tbl.increments(); 
       tbl.text("messages")
       tbl.integer("messagesId")
+      tbl.text("filename")
       tbl.timestamps(true, true);
     })
 
@@ -41,6 +42,7 @@ exports.up = function(knex) {
       tbl.increments();
       tbl.text("messages")
       tbl.integer("messagesId")
+      tbl.text("filename")
       tbl.timestamps(true, true);
     })
   }
