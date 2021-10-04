@@ -18,7 +18,7 @@ const s3 = new AWS.S3({
     secretAccessKey: process.env.SECRET_ACCESS_KEY
 })
 
-// POST record sketch table & upload file to cloud storage system 
+// POST record to sketch table & upload file to cloud storage system 
 router.post("/", upload, async (req, res) => { // Pass middleware (multer) to this endpoint to be handled first in this operation ('upload' variable).
     let myFile = req.file.originalname.split(".") // Split into array of substrings.
     const fileType = myFile[myFile.length - 1]
