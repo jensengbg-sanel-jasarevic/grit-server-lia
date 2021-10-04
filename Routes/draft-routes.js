@@ -15,6 +15,19 @@ router.get("/", async (req, res) => {
     });
 })
 
+// POST record drafts table 
+router.post("/", (req, res) => {
+    dbQueries.addSketchToDrafts({ message: `Sketch record added to draft table`, filename: req.body.filename })
+    .then(response => { 
+        console.log(response)
+        res.status(200).json({ message: "Record added to draft table." })
+    })
+    .catch(error => { 
+        console.error(error)
+        res.status(500).json({ message: "Could not add record to draft table." })
+    })
+})
+
 // GET specific draft
 router.get("/:id", (req, res) => {
     dbQueries.findDraft(parseInt(req.params.id))
