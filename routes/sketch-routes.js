@@ -31,8 +31,7 @@ router.post("/", upload, async (req, res) => { // Pass middleware (multer) to th
 
     dbQueries.addSketch({ message: `Sketch record added to sketch table`, filename: `${req.file.originalname}` })
     .then(response => { 
-        console.log(response)
-        res.status(200).json({ message: "Record added to sketch table." })
+        res.status(200).json({ message: `Record added to sketch table #${response}.` })
     })
     .catch(error => { 
         console.error(error)

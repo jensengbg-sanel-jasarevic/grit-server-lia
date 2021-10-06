@@ -19,8 +19,7 @@ router.get("/", async (req, res) => {
 router.post("/", (req, res) => {
     dbQueries.addSketchToDrafts({ message: `Sketch record added to draft table`, filename: req.body.filename })
     .then(response => { 
-        console.log(response)
-        res.status(200).json({ message: "Record added to draft table." })
+        res.status(200).json({ message: `Record added to draft table #${response}.` })
     })
     .catch(error => { 
         console.error(error)
