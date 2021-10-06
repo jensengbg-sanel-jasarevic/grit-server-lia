@@ -1,6 +1,6 @@
 const dbQueries = require("../model/database-queries"); // Database layer testing
 
-test("should verify if unique IDs being returned when performing database query to create", async () => {
+test("should verify if unique IDs returning when performing database query to create", async () => {
     // Arrange
     let actual = []
     
