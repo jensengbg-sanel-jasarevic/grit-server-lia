@@ -27,7 +27,8 @@ function getClientsMailbox() {
 }
 
 async function addToContactsMailbox(message) {
-    return await db("contacts").insert(message, ['id'])
+    return await db("contacts").insert(message)
+    //return await db("contacts").insert(message, ['id'])
 }
 
 async function addToClientsMailbox(message) {

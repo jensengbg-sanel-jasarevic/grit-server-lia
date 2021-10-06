@@ -18,19 +18,3 @@ test("should return correct draft when passing parameter to dynamic URL", async 
      // Assert
      expect(actual).toBe(expected);
     });
-
-test("should return 0 rows affected when attempting to delete a draft by passing large number as parameter", async () => {
-    // Arrange
-    const expected = 0
-    const largeNumber = 3213344455577788
-    let actual;
-        
-    // Act
-    await dbQueries.removeDraft(largeNumber)
-    .then((response) => {
-        actual = response
-    })
-    
-    // Assert
-    expect(actual).toBe(expected);
- });
