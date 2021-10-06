@@ -1,10 +1,9 @@
 // The up function is where we write code that updates the database to the next version.
 // The down function is where we write code that restores the previous version of the database.
-
 // Run 'npx knex migrate:latest' to create migration that will populate 'data' folder.  
 
 exports.up = function(knex) {
-  // Database schema
+  // Database schema represents the internal structure of the database. How e.g. tables, columns are organized and related in the database.
     return knex.schema
     // We pass the table name as the first argument and a callback function as the second argument..
     .createTable("sketches", tbl => { // Callback function to modify table's structure using the schema-building commands/methods.

@@ -1,8 +1,6 @@
-const supertest = require("supertest"); // Module for testing HTTP 
+const supertest = require("supertest"); // Module for testing HTTP. Use to test Business Logic (API) layer of app. 
 const app = require("../api/server"); // Express server
-const dbQueries = require("../model/database-queries");
-
-// toContain (see if a value is inside of a collection)
+const dbQueries = require("../model/database-queries"); // Database layer testing
 
 test("should return correct draft when passing parameter to dynamic URL", async () => {
     // Arrange

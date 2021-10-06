@@ -35,11 +35,13 @@ async function addToClientsMailbox(message) {
 }
 
 async function addSketch(sketch) {
-    return await db("sketches").insert(sketch, ['id'])
+    return await db("sketches").insert(sketch)
+    //return await db("sketches").insert(sketch, ['id'])
 }
 
 async function addSketchToDrafts(sketch) {
-    return await db("drafts").insert(sketch, ['id'])
+   return await db("drafts").insert(sketch)
+    //return await db("drafts").insert(sketch, ['id'])
 }
 
 function getSketches() {

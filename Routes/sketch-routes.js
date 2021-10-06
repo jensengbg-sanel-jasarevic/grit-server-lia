@@ -38,7 +38,7 @@ router.post("/", upload, async (req, res) => { // Pass middleware (multer) to th
         console.error(error)
         res.status(500).json({ message: "Could not add record to sketch table." })
     })
-
+/*
     s3.upload(params, (error, data) => {
         if(error){
             res.status(500).send(error)
@@ -46,7 +46,7 @@ router.post("/", upload, async (req, res) => { // Pass middleware (multer) to th
         res.status(200).send(data)
         }
     })
-
+*/
  })
 
 // GET sketches
