@@ -6,4 +6,4 @@ const config = require("./knexfile")[dbEngine]; // Get 'production' or 'developm
 
 module.exports = require("knex")(config); // Passing variable 'config' as argument to 'knex' module.  
 // Knex module now configurated to know which database management system to use.
-// When importing this file (dbConfig.js) anywhere in project it will now handle all configurations regarding which database management system app should use.  
+// When importing this file (db-config.js) anywhere in project it will now handle all configurations regarding which database management system app should use.  

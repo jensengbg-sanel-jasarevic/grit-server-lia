@@ -1,6 +1,6 @@
-// Database modeling
-const db = require("../dbConfig") 
+const db = require("../db-config") 
 
+// Database modeling
 module.exports = {
     addSketch,
     addSketchToDrafts,
