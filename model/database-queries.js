@@ -3,7 +3,7 @@ const db = require("../db-config")
 // Database modeling
 module.exports = {
     addSketch,
-    addSketchToDrafts,
+    addDraft,
     getSketches,
     findSketch,
     updateDraft,
@@ -40,7 +40,7 @@ async function addSketch(sketch) {
     //return await db("sketches").insert(sketch, ['id'])
 }
 
-async function addSketchToDrafts(sketch) {
+async function addDraft(sketch) {
    return await db("drafts").insert(sketch)
     //return await db("drafts").insert(sketch, ['id'])
 }
@@ -75,7 +75,8 @@ function removeDraft(id) {
 }
 
 async function addDraftToOrders(draft) {
-    return await db("orders").insert(draft, ['id'])
+    return await db("orders").insert(draft)
+   // return await db("orders").insert(draft, ['id'])
 }
 
 function getOrders() {

@@ -1,6 +1,6 @@
 const dbQueries = require("../model/database-queries"); // Database layer testing
 
-test("should verify if unique IDs returning when performing database query to create", async () => {
+test("should verify if unique IDs returned when performing database query to create", async () => {
     // Arrange
     let actual = []
     
@@ -35,7 +35,7 @@ test("should check if correct message is stored in table", async () => {
     expect(actual).toEqual(expected);
 });
 
-test("should verify if table has the correct number of columns", async () => {
+test("should verify if 'sketches' table has the correct number of columns", async () => {
     // Arrange
     const expected = 5
     let actual = []

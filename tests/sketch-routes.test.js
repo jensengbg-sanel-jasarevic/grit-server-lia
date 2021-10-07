@@ -17,18 +17,17 @@ test("should return a data type that is array when making GET request", async ()
   expect(actual).toBe(expected);
 });
 
-test("GET endpoint should return the correct filename when adding new record to database", async () => {
+test("should return HTTP 200 when hitting endpoint that gets all sketches", async () => {
   // Arrange
-  const expected = "ipsum.png"
+  const expected = 200
   let actual;
-
+      
   // Act
-  await dbQueries.addSketch({ filename: "ipsum.png" });
-  await supertest(app).get("/api/sketches")
-    .then((response) => {
-  actual = response.body[response.body.length - 1].filename
-  });
+  await supertest(app).get('/api/sketches')
+  .then((resp) => {
+      actual = resp.statusCode
+  })
 
   // Assert
-  expect(actual).toEqual(expected);
+  expect(actual).toBe(expected);
 });
