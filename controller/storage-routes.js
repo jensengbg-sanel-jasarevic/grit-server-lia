@@ -1,26 +1,20 @@
 const express = require ("express");
-const AWS = require("aws-sdk") // Software development kit for start using any services for Amazon Web Services.
+const DigitalOceanSpaces = require("../model/object-storage")
+
 const router = express.Router() 
 
-const spacesEndpoint = new AWS.Endpoint('ams3.digitaloceanspaces.com');
-
-// Creating an instance of an object that has a constructor function.
-const s3 = new AWS.S3({ // Initialization for S3. Passing the credentials.
-    endpoint: spacesEndpoint,
-    accessKeyId: process.env.ACCESS_KEY_ID,
-    secretAccessKey: process.env.SECRET_ACCESS_KEY
-})
-
-// GET a file from Space (download)
+// GET a file from 'Space' (download)
 router.get("/space/:filename", (req, res) => {
     let params = {
         Bucket: process.env.BUCKET_NAME,
         Key: req.params.filename
     };
     
-    s3.getObject(params, function(err, data) {
-        if (err) console.log(err, err.stack);
-        else   {
+    DigitalOceanSpaces.s3.getObject(params, function(err, data) {
+        if (err) {
+            res.status(404).send(err)
+        } 
+        else {
           res.status(200).send(data)
         }
     });
@@ -32,7 +26,7 @@ router.get("/space", (req, res) => {
         Bucket: process.env.BUCKET_NAME
     };
 
-    s3.listObjectsV2(params, function (error, data) {
+    DigitalOceanSpaces.s3.listObjectsV2(params, function (error, data) {
         if (!error) {
             let files = []
             // Get Contents array from response data object.
@@ -44,17 +38,18 @@ router.get("/space", (req, res) => {
             });
             res.status(200).send(files)
         } else {
-            res.status(500).send(error)
+            res.status(403).send(error)
         }
     });
 })
 
 // GET list of all 'Spaces'
 router.get("/spaces", (req, res) => {
-    s3.listBuckets({}, function(error, data) {
+    DigitalOceanSpaces.s3.listBuckets({}, function(error, data) {
         if (error) {
         res.status(500).send(error)
-        } else {
+        } 
+        else {
             data['Buckets'].forEach(function(space) {
                 console.log(space['Name']);
             })

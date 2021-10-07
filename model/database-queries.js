@@ -3,50 +3,45 @@ const db = require("../db-config")
 // Database modeling
 module.exports = {
     addSketch,
-    addDraft,
     getSketches,
     findSketch,
-    updateDraft,
+    addDraft,
     getDrafts,
     findDraft,
+    updateDraft,
     removeDraft,
-    addDraftToOrders,
+    addOrder,
     getOrders,
-    addToContactsMailbox,
-    addToClientsMailbox,
+    addContactsMailbox,
     getContactsMailbox,
+    addClientsMailbox,
     getClientsMailbox
 };
 
-function getContactsMailbox() {
-    return db("contacts")
-}
-
-function getClientsMailbox() {
-    return db("clients")
-}
-
-async function addToContactsMailbox(message) {
-    return await db("contacts").insert(message)
-    //return await db("contacts").insert(message, ['id'])
-}
-
-async function addToClientsMailbox(message) {
-    return await db("clients").insert(message, ['id'])
-}
-
 async function addSketch(sketch) {
-    return await db("sketches").insert(sketch)
-    //return await db("sketches").insert(sketch, ['id'])
-}
-
-async function addDraft(sketch) {
-   return await db("drafts").insert(sketch)
-    //return await db("drafts").insert(sketch, ['id'])
+    //return await db("sketches").insert(sketch)
+    return await db("sketches").insert(sketch, ['id'])
 }
 
 function getSketches() {
     return db("sketches")
+}
+
+function findSketch(id) {
+    return db("sketches").where({ id: id }).first()
+}
+
+async function addDraft(sketch) {
+    //return await db("drafts").insert(sketch)
+     return await db("drafts").insert(sketch, ['id'])
+ }
+
+function getDrafts() {
+    return db("drafts")
+}
+
+function findDraft(id) {
+    return db("drafts").where({ id: id }).first()
 }
 
 async function updateDraft(id, comment) {
@@ -58,27 +53,32 @@ async function updateDraft(id, comment) {
         });
 }
 
-function findSketch(id) {
-    return db("sketches").where({ id: id }).first()
-}
-
-function getDrafts() {
-    return db("drafts")
-}
-
-function findDraft(id) {
-    return db("drafts").where({ id: id }).first()
-}
-
 function removeDraft(id) {
     return db("drafts").where({ id }).del()
 }
 
-async function addDraftToOrders(draft) {
-    return await db("orders").insert(draft)
-   // return await db("orders").insert(draft, ['id'])
+async function addOrder(draft) {
+    //return await db("orders").insert(draft)
+    return await db("orders").insert(draft, ['id'])
 }
 
 function getOrders() {
     return db("orders")
+}
+
+async function addContactsMailbox(message) {
+    //return await db("contacts").insert(message)
+    return await db("contacts").insert(message, ['id'])
+}
+
+function getContactsMailbox() {
+    return db("contacts")
+}
+
+async function addClientsMailbox(message) {
+    return await db("clients").insert(message, ['id'])
+}
+
+function getClientsMailbox() {
+    return db("clients")
 }

@@ -17,7 +17,7 @@ router.get("/contacts", (req, res) => {
 
  // POST to contacts mailbox
  router.post("/contacts", async (req, res) => {
-    dbQueries.addToContactsMailbox({ messages: `${req.body.text}`, messagesId: `${req.body.textId}`, filename: `${req.body.filename}` })
+    dbQueries.addContactsMailbox({ messages: `${req.body.text}`, messagesId: `${req.body.textId}`, filename: `${req.body.filename}` })
     
     .then(data => { 
          res.status(200).json(data)
@@ -40,7 +40,7 @@ router.get("/client", (req, res) => {
 
 // POST to clients mailbox
 router.post("/client", async (req, res) => {
-    dbQueries.addToClientsMailbox({ messages: `${req.body.text}`, messagesId: `${req.body.textId}`, filename: `${req.body.filename}` })
+    dbQueries.addClientsMailbox({ messages: `${req.body.text}`, messagesId: `${req.body.textId}`, filename: `${req.body.filename}` })
 
      .then(data => { 
          res.status(200).json(data)

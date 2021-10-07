@@ -1,5 +1,21 @@
 const dbQueries = require("../model/database-queries"); // Database layer testing
 
+test("should return collection of 5 elements after performing read operations on tables", async () => {
+    // Arrange
+    const expected = 5
+    let actual = []
+    
+    // Act
+    await dbQueries.getSketches().then((resp) => { actual.push(resp) })
+    await dbQueries.getDrafts().then((resp) => { actual.push(resp) })
+    await dbQueries.getOrders().then((resp) => { actual.push(resp) })
+    await dbQueries.getContactsMailbox().then((resp) => { actual.push(resp) })
+    await dbQueries.getClientsMailbox().then((resp) => { actual.push(resp) })
+
+    // Assert
+    expect(actual.length).toBe(expected);
+});
+
 test("should verify if unique IDs returned when performing database query to create", async () => {
     // Arrange
     let actual = []
@@ -25,7 +41,7 @@ test("should check if correct message is stored in table", async () => {
     let actual;
     
     // Act
-    await dbQueries.addToContactsMailbox({ messages: msg })
+    await dbQueries.addContactsMailbox({ messages: msg })
     await dbQueries.getContactsMailbox()
     .then((response) => {
         actual = response[response.length - 1].messages
@@ -35,7 +51,7 @@ test("should check if correct message is stored in table", async () => {
     expect(actual).toEqual(expected);
 });
 
-test("should verify if 'sketches' table has the correct number of columns", async () => {
+test("should verify if table has the correct number of columns", async () => {
     // Arrange
     const expected = 5
     let actual = []
@@ -79,7 +95,7 @@ test("should check if table has 'messagesId' column", async () => {
     let actual = []
     
     // Act
-    await dbQueries.addToContactsMailbox({})
+    await dbQueries.addContactsMailbox({})
     await dbQueries.getContactsMailbox()
     .then((response) => {
         let record = response[0]
@@ -92,14 +108,14 @@ test("should check if table has 'messagesId' column", async () => {
     expect(actual).toContain(expected);
 });
 
-test("should return 0 rows affected when attempting to delete a draft by passing large number as parameter", async () => {
+test("should return 0 rows affected when attempting to delete a draft by passing non-existing ID as parameter", async () => {
     // Arrange
     const expected = 0
-    const largeNumber = 3213344455577788
+    const nonExistingID = 3213344455577788
     let actual;
         
     // Act
-    await dbQueries.removeDraft(largeNumber)
+    await dbQueries.removeDraft(nonExistingID)
     .then((response) => {
         actual = response
     })

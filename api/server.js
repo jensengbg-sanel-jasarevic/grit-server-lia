@@ -2,11 +2,11 @@ const express = require("express");
 const cors = require('cors')
 
 // From 'Routes' directory import code via path to the files
-const sketchesRouter = require("../routes/sketch-routes")
-const draftsRouter = require("../routes/draft-routes")
-const ordersRouter = require("../routes/order-routes")
-const mailboxRouter = require("../routes/mailbox-routes")
-const storageRouter = require("../routes/storage-routes")
+const sketchesRouter = require("../controller/sketch-routes")
+const draftsRouter = require("../controller/draft-routes")
+const ordersRouter = require("../controller/order-routes")
+const mailboxRouter = require("../controller/mailbox-routes")
+const storageRouter = require("../controller/storage-routes")
 
 const server = express() 
 

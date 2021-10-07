@@ -22,7 +22,7 @@ router.post("/", async (req, res) => {
         if (order){
             order.message = `Draft record added to order table.`
             order.filename = `${req.body.filename}`
-            dbQueries.addDraftToOrders(order)
+            dbQueries.addOrder(order)
             res.status(201).json(order)
         }
         else { 
