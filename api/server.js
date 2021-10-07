@@ -15,7 +15,7 @@ server.use(express.json())
 server.use(cors())
 
 // API Endpoints
-server.get("/", (req, res) => { res.json("API") })
+server.get("/", (req, res) => { res.send("API") })
 server.use("/api/sketches", sketchesRouter)
 server.use("/api/drafts", draftsRouter)
 server.use("/api/orders", ordersRouter)
