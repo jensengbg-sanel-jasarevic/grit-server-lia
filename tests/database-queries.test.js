@@ -16,7 +16,23 @@ test("should return collection of 5 elements after performing read operations on
     expect(actual.length).toBe(expected);
 });
 
-test("should verify if unique IDs returned when performing database query to create", async () => {
+test("should return total collection of 5 elements after performing create operation on tables", async () => {
+    // Arrange
+    const expected = 5
+    let actual = []
+    
+    // Act
+    await dbQueries.addSketch({}).then((resp) => { actual.push(resp[0]) })
+    await dbQueries.addDraft({}).then((resp) => { actual.push(resp[0]) })
+    await dbQueries.addOrder({}).then((resp) => { actual.push(resp[0]) })
+    await dbQueries.addClientsMailbox({}).then((resp) => { actual.push(resp[0]) })
+    await dbQueries.addContactsMailbox({}).then((resp) => { actual.push(resp[0]) })
+
+    // Assert
+    expect(actual.length).toBe(expected);
+});
+
+test("should verify if unique IDs returned when performing create operation on table", async () => {
     // Arrange
     let actual = []
     
@@ -70,25 +86,6 @@ test("should verify if table has the correct number of columns", async () => {
     expect(actual.length).toBe(expected);
 });
 
-test("should check if table has column named 'filename'", async () => {
-    // Arrange
-    const expected = "filename"
-    let actual = []
-    
-    // Act
-    await dbQueries.addSketch({});
-    await dbQueries.getSketches()
-    .then((response) => {
-        let record = response[0]
-        for (column in record) {
-            actual.push(column);
-        }
-    })
-    
-    // Assert
-    expect(actual).toContain(expected);
-});
-
 test("should check if table has 'messagesId' column", async () => {
     // Arrange
     const expected = "messagesId"
@@ -108,16 +105,35 @@ test("should check if table has 'messagesId' column", async () => {
     expect(actual).toContain(expected);
 });
 
-test("should return 0 rows affected when attempting to delete a draft by passing non-existing ID as parameter", async () => {
+test("should return 0 rows affected when attempting to delete a draft by passing incorrect parameter", async () => {
     // Arrange
     const expected = 0
-    const nonExistingID = 3213344455577788
+    const param = false
     let actual;
         
     // Act
-    await dbQueries.removeDraft(nonExistingID)
+    await dbQueries.removeDraft(param)
     .then((response) => {
         actual = response
+    })
+    
+    // Assert
+    expect(actual).toBe(expected);
+ });
+
+ test("should return 1 row affected when performing delete operation by passing valid draft", async () => {
+    // Arrange
+    const expected = 1
+    let draftID;
+    let actual;
+        
+    // Act
+    await dbQueries.addDraft({})
+    .then((resp) => {
+        draftID = resp[0] })
+    await dbQueries.removeDraft(draftID)
+    .then((resp) => {
+        actual = resp
     })
     
     // Assert
