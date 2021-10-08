@@ -17,13 +17,18 @@ router.get("/contacts", (req, res) => {
 
  // POST to contacts mailbox
  router.post("/contacts", async (req, res) => {
+    if (req.body.text && req.body.textId && req.body.filename) {
     dbQueries.addContactsMailbox({ messages: `${req.body.text}`, messagesId: `${req.body.textId}`, filename: `${req.body.filename}` })
-    
     .then(data => { 
          res.status(200).json(data)
         })
-     .catch(error => { 
-         res.status(500).json({ message: "Unable to add message" }) });
+        .catch(error => { 
+            res.status(500).json({ message: "Operation could not be performed on database." }) 
+        });
+    }
+    else {
+        res.status(400).json({ message: "Required data values missing from client request." }) 
+    }        
  })
 
 // GET client mailbox 
@@ -40,13 +45,18 @@ router.get("/client", (req, res) => {
 
 // POST to clients mailbox
 router.post("/client", async (req, res) => {
-    dbQueries.addClientsMailbox({ messages: `${req.body.text}`, messagesId: `${req.body.textId}`, filename: `${req.body.filename}` })
-
-     .then(data => { 
-         res.status(200).json(data)
-        })
-     .catch(error => { 
-         res.status(500).json({ message: "Unable to add message" }) });
+    if (req.body.text && req.body.textId && req.body.filename) {
+        dbQueries.addClientsMailbox({ messages: `${req.body.text}`, messagesId: `${req.body.textId}`, filename: `${req.body.filename}` })
+        .then(data => { 
+            res.status(200).json(data)
+           })
+        .catch(error => { 
+            res.status(500).json({ message: "Operation could not be performed on database." }) 
+        });
+    }
+    else {
+      res.status(400).json({ message: "Required data values missing from client request." }) 
+  }
  })
 
 module.exports = router;
