@@ -1,4 +1,4 @@
-const app = require("../api/server"); // Express server
+const app = require("../api/server"); // Express server 
 const supertest = require("supertest"); // Module for testing HTTP. Use to test Business Logic (API) layer of app. 
 
 test("should return HTTP 404 if attempting to get a non-existing file from endpoint", async () => {

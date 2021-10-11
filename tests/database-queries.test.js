@@ -32,7 +32,7 @@ test("should return total collection of 5 elements after performing create opera
     expect(actual.length).toBe(expected);
 });
 
-test("should verify if unique IDs returned when performing create operation on table", async () => {
+test("should verify if unique ID's returned when performing create operation on table", async () => {
     // Arrange
     let actual = []
     
