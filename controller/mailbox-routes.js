@@ -17,7 +17,7 @@ router.get("/contacts", (req, res) => {
 
  // POST to contacts mailbox
  router.post("/contacts", async (req, res) => {
-    if (req.body.text && req.body.textId && req.body.filename) {
+    if (req.body.textId && req.body.filename) {
     dbQueries.addContactsMailbox({ messages: `${req.body.text}`, messagesId: `${req.body.textId}`, filename: `${req.body.filename}` })
     .then(data => { 
          res.status(200).json(data)
