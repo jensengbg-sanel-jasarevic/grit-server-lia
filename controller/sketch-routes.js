@@ -25,21 +25,13 @@ router.post("/", upload, async (req, res) => {
     };
 
     dbQueries.addSketch({ message: `Sketch record added to sketch table`, filename: `${req.file.originalname}` })
-    .then(response => { 
-        res.status(200).json({ message: `Record added to sketch table #${response}.` })
-    })
-    .catch(error => { 
-        console.error(error)
-        res.status(500).json({ message: "Could not add record to sketch table." })
-    })
-
-    DigitalOceanSpaces.s3.upload(params, (error, data) => {
-        if(error){
-            res.status(500).send(error)
-        } else {
-        res.status(200).send(data)
-        }
-    })
+        DigitalOceanSpaces.s3.upload(params, (error, data) => {
+            if(error){
+                res.status(500).send(error)
+            } else {
+            res.status(200).send(data)
+            }
+        })
  })
 
 // GET sketches
