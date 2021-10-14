@@ -20,10 +20,12 @@ router.post("/", async (req, res) => {
     
     .then(order => {
         if (order){
-            order.message = `Draft record added to order table.`
-            order.filename = `${req.body.filename}`
-            dbQueries.addOrder(order)
-            res.status(201).json(order)
+            let orderObj = {
+                message: "Draft record added to order table.",
+                filename: `${req.body.filename}`,
+            }
+            dbQueries.addOrder(orderObj)
+            res.status(201).json(orderObj)
         }
         else { 
             res.status(404).json({ message: "Requested resource was not found." })

@@ -44,10 +44,10 @@ function findDraft(id) {
     return db("drafts").where({ id: id }).first()
 }
 
-async function updateDraft(id, comment) {
+async function updateDraft(id, value) {
     return await db("drafts")
         .where({ id })
-        .update(comment)
+        .update({rejected: value})
         .then(() => {  // Returns the object with id
             return findDraft(id);
         });

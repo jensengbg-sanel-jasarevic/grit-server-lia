@@ -19,6 +19,7 @@ exports.up = function(knex) {
       tbl.increments()
       tbl.text("message")
       tbl.text("filename")
+      tbl.text("rejected")
       tbl.timestamps(true, true);
     })
         
@@ -26,6 +27,7 @@ exports.up = function(knex) {
       tbl.increments()
       tbl.text("message")
       tbl.text("filename")
+      tbl.text("rejected")
       tbl.timestamps(true, true);
     })
 

@@ -43,9 +43,26 @@ router.post("/", async (req, res) => {
     })
 })
 
+// PATCH specific draft
+router.patch("/", async (req, res) => { 
+    await dbQueries.updateDraft(req.body.id, "rejected")
+
+    .then(updated => {
+        if (updated) {
+            res.status(200).json({ message: "Operation successful"});
+        } else { 
+            res.status(404).json({ message: "Record not found" });
+        }
+    })
+    .catch(error => {
+        res.status(500).json({ message: "Unable to perform operation" });
+    });
+
+});
+
 // DELETE specific draft
-router.delete("/", async (req, res) => {  
-   await dbQueries.removeDraft(req.body.id)
+router.delete("/", async (req, res) => { 
+    await dbQueries.removeDraft(req.body.id)
 
     .then(count => { 
         if (count > 0) { // Knex del() returns number of affected rows deleted.
@@ -59,5 +76,4 @@ router.delete("/", async (req, res) => {
         res.status(500).json({ message: "Unable to perform operation." });
     });
 });
-
 module.exports = router;
