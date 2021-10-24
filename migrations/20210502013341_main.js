@@ -35,6 +35,7 @@ exports.up = function(knex) {
       tbl.increments(); 
       tbl.text("messages")
       tbl.integer("messagesId")
+      tbl.text("adminName")
       tbl.text("filename")
       tbl.timestamps(true, true);
     })
@@ -43,9 +44,25 @@ exports.up = function(knex) {
       tbl.increments();
       tbl.text("messages")
       tbl.integer("messagesId")
+      tbl.text("username")
       tbl.text("filename")
       tbl.timestamps(true, true);
     })
+
+    .createTable("keys", (tbl) => {
+      tbl.increments(); 
+      tbl.integer("key")
+      tbl.boolean("activated") 
+      tbl.timestamps(true, true);
+    })
+
+    .createTable("registrations", (tbl) => {
+      tbl.increments();
+      tbl.text("name") 
+      tbl.text("password") 
+      tbl.timestamps(true, true);
+    })
+
   }
   
   // Reverse our migrations, in the down function of our migration file we add code that removes the whole table we created in the up function.

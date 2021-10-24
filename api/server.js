@@ -7,6 +7,7 @@ const draftsRouter = require("../controller/draft-routes")
 const ordersRouter = require("../controller/order-routes")
 const mailboxRouter = require("../controller/mailbox-routes")
 const storageRouter = require("../controller/storage-routes")
+const loginRouter = require("../controller/login-routes")
 
 const server = express() 
 
@@ -21,5 +22,6 @@ server.use("/api/drafts", draftsRouter)
 server.use("/api/orders", ordersRouter)
 server.use("/api/mailbox", mailboxRouter)
 server.use("/api/storage", storageRouter)
+server.use("/api/login", loginRouter)
 
 module.exports = server;
