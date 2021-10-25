@@ -1,6 +1,5 @@
 const db = require("../db-config") 
 
-// Database modeling
 module.exports = {
     addSketch,
     getSketches,
@@ -50,7 +49,7 @@ async function addSketch(sketch) {
 }
 
 function getSketches() {
-    return db("registrations")
+    return db("sketches")
 }
 
 function findSketch(id) {
