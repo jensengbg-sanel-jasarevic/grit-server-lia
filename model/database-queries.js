@@ -11,10 +11,8 @@ module.exports = {
     removeDraft,
     addOrder,
     getOrders,
-    addContactsMailbox,
-    getContactsMailbox,
-    addClientsMailbox,
-    getClientsMailbox,
+    addMailbox,
+    getMailbox,
     addUserKey,
     findUserKey,
     updateUserKey,
@@ -91,19 +89,11 @@ function getOrders() {
     return db("orders")
 }
 
-async function addContactsMailbox(message) {
+async function addMailbox(message) {
     //return await db("contacts").insert(message)
-    return await db("contacts").insert(message, ['id'])
+    return await db("mailbox").insert(message, ['id'])
 }
 
-function getContactsMailbox() {
-    return db("contacts")
-}
-
-async function addClientsMailbox(message) {
-    return await db("clients").insert(message, ['id'])
-}
-
-function getClientsMailbox() {
-    return db("clients")
+function getMailbox() {
+    return db("mailbox")
 }

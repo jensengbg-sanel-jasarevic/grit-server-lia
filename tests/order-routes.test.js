@@ -37,18 +37,3 @@ test("should return HTTP 201 when hitting post endpoint with valid payload", asy
     // Assert
     expect(actual).toBe(expected);
 });
-
-test("should return HTTP 500 when attempting to post without any payload", async () => {
-    // Arrange
-    const expected = 500
-    let actual;
-        
-    // Act
-    await supertest(app).post('/api/orders/')
-    .then((resp) => {
-        actual = resp.statusCode
-    })
-
-    // Assert
-    expect(actual).toBe(expected);
-});

@@ -1,38 +1,36 @@
 const dbQueries = require("../model/database-queries"); // Database layer testing
 
-test("should return collection of 5 elements after performing read operations on tables", async () => {
+test("should return collection of 4 elements after performing 'Read' operations on tables", async () => {
     // Arrange
-    const expected = 5
+    const expected = 4
     let actual = []
     
     // Act
     await dbQueries.getSketches().then((resp) => { actual.push(resp) })
     await dbQueries.getDrafts().then((resp) => { actual.push(resp) })
     await dbQueries.getOrders().then((resp) => { actual.push(resp) })
-    await dbQueries.getContactsMailbox().then((resp) => { actual.push(resp) })
-    await dbQueries.getClientsMailbox().then((resp) => { actual.push(resp) })
+    await dbQueries.getMailbox().then((resp) => { actual.push(resp) })
 
     // Assert
     expect(actual.length).toBe(expected);
 });
 
-test("should return total collection of 5 elements after performing create operation on tables", async () => {
+test("should return total collection of 4 elements after performing 'Create' operation on tables", async () => {
     // Arrange
-    const expected = 5
+    const expected = 4
     let actual = []
     
     // Act
     await dbQueries.addSketch({}).then((resp) => { actual.push(resp[0]) })
     await dbQueries.addDraft({}).then((resp) => { actual.push(resp[0]) })
     await dbQueries.addOrder({}).then((resp) => { actual.push(resp[0]) })
-    await dbQueries.addClientsMailbox({}).then((resp) => { actual.push(resp[0]) })
-    await dbQueries.addContactsMailbox({}).then((resp) => { actual.push(resp[0]) })
+    await dbQueries.addMailbox({}).then((resp) => { actual.push(resp[0]) })
 
     // Assert
     expect(actual.length).toBe(expected);
 });
 
-test("should verify if unique ID's returned when performing create operation on table", async () => {
+test("should verify if unique ID's returned when performing 'Create' operation on table", async () => {
     // Arrange
     let actual = []
     
@@ -57,10 +55,10 @@ test("should check if correct message is stored in table", async () => {
     let actual;
     
     // Act
-    await dbQueries.addContactsMailbox({ messages: msg })
-    await dbQueries.getContactsMailbox()
+    await dbQueries.addMailbox({ message: msg })
+    await dbQueries.getMailbox()
     .then((response) => {
-        actual = response[response.length - 1].messages
+        actual = response[response.length - 1].message
     })
     
     // Assert
@@ -69,13 +67,14 @@ test("should check if correct message is stored in table", async () => {
 
 test("should verify if table has the correct number of columns", async () => {
     // Arrange
-    const expected = 5
+    const expected = 2
     let actual = []
     
     // Act
     await dbQueries.addSketch({});
     await dbQueries.getSketches()
     .then((response) => {
+        console.log(response)
         let record = response[0]
         for (column in record) {
             actual.push(column);
@@ -86,14 +85,14 @@ test("should verify if table has the correct number of columns", async () => {
     expect(actual.length).toBe(expected);
 });
 
-test("should check if table has 'messagesId' column", async () => {
+test("should check if table has 'draftId' column", async () => {
     // Arrange
-    const expected = "messagesId"
+    const expected = "draftId"
     let actual = []
     
     // Act
-    await dbQueries.addContactsMailbox({})
-    await dbQueries.getContactsMailbox()
+    await dbQueries.addMailbox({})
+    await dbQueries.getMailbox()
     .then((response) => {
         let record = response[0]
         for (column in record) {

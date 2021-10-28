@@ -10,42 +10,32 @@ exports.up = function(knex) {
       // To create columns we call methods on the tbl object. Depending on the column we want to create, we call different methods.
       // One column that most tables have is a primary key column. This column is used to keep the record id, and it usually contains an auto incremented integer.
       tbl.increments() // Here's how we create a primary key column named 'id' that will be incremented each time a record is created:
-      tbl.text("message")
       tbl.text("filename")
-      tbl.timestamps(true, true) 
     })
 
     .createTable("drafts", tbl => { 
       tbl.increments()
-      tbl.text("message")
+      tbl.text("sender")
+      tbl.text("receiver")
       tbl.text("filename")
       tbl.text("rejected")
-      tbl.timestamps(true, true);
     })
         
     .createTable("orders", tbl => { 
       tbl.increments()
+      tbl.text("client")
+      tbl.text("filename")
+      tbl.integer("draftId")
+      tbl.timestamps(true, true);
+    })
+
+    .createTable("mailbox", (tbl) => {
+      tbl.increments();
+      tbl.text("sender")
+      tbl.text("receiver")
       tbl.text("message")
       tbl.text("filename")
-      tbl.text("rejected")
-      tbl.timestamps(true, true);
-    })
-
-    .createTable("clients", (tbl) => {
-      tbl.increments(); 
-      tbl.text("messages")
-      tbl.integer("messagesId")
-      tbl.text("adminName")
-      tbl.text("filename")
-      tbl.timestamps(true, true);
-    })
-
-    .createTable("contacts", (tbl) => {
-      tbl.increments();
-      tbl.text("messages")
-      tbl.integer("messagesId")
-      tbl.text("username")
-      tbl.text("filename")
+      tbl.integer("draftId")
       tbl.timestamps(true, true);
     })
 
@@ -53,14 +43,13 @@ exports.up = function(knex) {
       tbl.increments(); 
       tbl.integer("key")
       tbl.boolean("activated") 
-      tbl.timestamps(true, true);
     })
 
     .createTable("registrations", (tbl) => {
       tbl.increments();
       tbl.text("name") 
       tbl.text("password") 
-      tbl.timestamps(true, true);
+      tbl.text("role") 
     })
 
   }

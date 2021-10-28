@@ -33,8 +33,9 @@ router.get("/:id", (req, res) => {
 
 // POST record drafts table 
 router.post("/", async (req, res) => {
-   await dbQueries.addDraft({ message: `Sketch record added to draft table`, filename: req.body.filename })
+   await dbQueries.addDraft({ sender: req.body.sender, receiver: req.body.receiver, filename: req.body.filename })
     .then(response => { 
+        console.log(response)
         res.status(201).json({ message: `Record added to draft table #${response}.` })
     })
     .catch(error => { 
@@ -76,4 +77,5 @@ router.delete("/", async (req, res) => {
         res.status(500).json({ message: "Unable to perform operation." });
     });
 });
+
 module.exports = router;

@@ -15,25 +15,20 @@ router.get("/", (req, res) => {
     });
 });
 
+// POST order
 router.post("/", async (req, res) => {
-    await dbQueries.findDraft(req.body.id)
-    
-    .then(order => {
-        if (order){
-            let orderObj = {
-                message: "Draft record added to order table.",
-                filename: `${req.body.filename}`,
-            }
-            dbQueries.addOrder(orderObj)
-            res.status(201).json(orderObj)
+    try {
+        await dbQueries.findDraft(req.body.id)
+        let orderObj = {
+            client: req.body.client,
+            draftId: req.body.id,
+            filename: req.body.filename
         }
-        else { 
-            res.status(404).json({ message: "Requested resource was not found." })
-        }
-    })
-    .catch(error => { 
-        res.status(500).json({ message: "Unable to perform operation. No parameters received." });
-    }); 
+        dbQueries.addOrder(orderObj)
+        res.status(201).json(orderObj)
+    }catch(error) {
+    res.status(404).json({ message: "Requested resource was not found." })
+    }
 })
 
 module.exports = router;
