@@ -16,7 +16,7 @@ router.post("/registration", async (req, res) => {
         let authentication = await dbQueries.findUserKey(userKey)
        
         if(authentication.length > 0 && authentication[0].activated === null) { 
-            await dbQueries.updateUserKey(userKey)
+           // await dbQueries.updateUserKey(userKey)
 
             const HASHED_PASSWORD = await bcrypt.hashSync(password, salt)
 
