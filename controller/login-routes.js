@@ -23,10 +23,10 @@ router.post("/registration", async (req, res) => {
             dbQueries.addUser({ name: `${username}`, password: `123`, role: "client" })
             res.status(201).send('User created.')             
         } else {
-            res.status(401).send('Lacks valid authentication credentials.')
+            res.status(200).send('Lacks valid authentication credentials.')
         }
     } else {
-        res.status(400).json({ message: "Required data values missing from client request." }) 
+        res.status(204).json({ message: "Required data values missing from client request." }) 
     }       
 })
 
