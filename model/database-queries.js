@@ -24,11 +24,11 @@ async function addUserKey(userkey) {
     return await db("keys").insert(userkey, ['id'])
 }
 
- function findUserKey(userkey) {
+async function findUserKey(userkey) {
     return db("keys").where({ key: userkey })
 }
 
-function updateUserKey(userkey) {
+async function updateUserKey(userkey) {
     return db("keys").where({ key: userkey })
     .update({activated: true})
 }
