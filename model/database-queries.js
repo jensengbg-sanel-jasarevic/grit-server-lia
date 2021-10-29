@@ -20,16 +20,16 @@ module.exports = {
     findUser
 };
 
-async function addUserKey(userKey) {
-    return await db("keys").insert(userKey, ['id'])
+async function addUserKey(userkey) {
+    return await db("keys").insert(userkey, ['id'])
 }
 
- function findUserKey(userKey) {
-    return db("keys").where({ key: userKey })
+ function findUserKey(userkey) {
+    return db("keys").where({ key: userkey })
 }
 
-function updateUserKey(userKey) {
-    return db("keys").where({ key: userKey })
+function updateUserKey(userkey) {
+    return db("keys").where({ key: userkey })
     .update({activated: true})
 }
 
