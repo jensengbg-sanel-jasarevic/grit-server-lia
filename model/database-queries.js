@@ -25,11 +25,11 @@ async function addUserKey(userkey) {
 }
 
 async function findUserKey(userkey) {
-    return db("keys").where({ key: userkey })
+    return await db("keys").where({ key: userkey })
 }
 
 async function updateUserKey(userkey) {
-    return db("keys").where({ key: userkey })
+    return await db("keys").where({ key: userkey })
     .update({activated: true})
 }
 
@@ -37,8 +37,8 @@ async function addUser(user) {
     return await db("registrations").insert(user, ['id'])
 }
 
-function findUser(user) {
-    return db("registrations").where({ name: user })
+async function findUser(user) {
+    return await db("registrations").where({ name: user })
 }
 
 async function addSketch(sketch) {
