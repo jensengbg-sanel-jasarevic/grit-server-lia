@@ -1,10 +1,5 @@
 const express = require("express");
 const cors = require('cors')
-const corsOptions ={
-   origin: '*', 
-   credentials: true,           
-   optionSuccessStatus: 200
-}
 
 // From 'Routes' directory import code via path to the files
 const loginRouter = require("../controller/login-routes")
@@ -18,7 +13,7 @@ const server = express()
 
 // Middlewares
 server.use(express.json()) 
-server.use(cors(corsOptions)) 
+server.use(cors())
 
 // API Endpoints
 server.get("/", (req, res) => { res.send("API") })
