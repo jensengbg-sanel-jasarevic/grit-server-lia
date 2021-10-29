@@ -1,9 +1,12 @@
 const db = require("../db-config") 
 
 module.exports = {
+    addUserkey,
+    findUserkey,
+    updateUserkey,
+    addUser,
+    findUser,
     addSketch,
-    getSketches,
-    findSketch,
     addDraft,
     getDrafts,
     findDraft,
@@ -12,23 +15,18 @@ module.exports = {
     addOrder,
     getOrders,
     addMailbox,
-    getMailbox,
-    addUserKey,
-    findUserKey,
-    updateUserKey,
-    addUser,
-    findUser
+    getMailbox
 };
 
-async function addUserKey(userkey) {
+async function addUserkey(userkey) {
     return await db("keys").insert(userkey, ['id'])
 }
 
-async function findUserKey(userkey) {
+async function findUserkey(userkey) {
     return await db("keys").where({ key: userkey })
 }
 
-async function updateUserKey(userkey) {
+async function updateUserkey(userkey) {
     return await db("keys").where({ key: userkey })
     .update({activated: true})
 }
@@ -44,14 +42,6 @@ async function findUser(user) {
 async function addSketch(sketch) {
     //return await db("sketches").insert(sketch)
     return await db("sketches").insert(sketch, ['id'])
-}
-
-function getSketches() {
-    return db("sketches")
-}
-
-function findSketch(id) {
-    return db("sketches").where({ id: id }).first()
 }
 
 async function addDraft(sketch) {

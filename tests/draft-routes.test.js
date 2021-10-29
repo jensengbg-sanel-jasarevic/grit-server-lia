@@ -17,26 +17,6 @@ test("should return HTTP 200 when hitting endpoint that gets all drafts", async 
     expect(actual).toBe(expected);
 });
 
-test("should return HTTP 200 when attempting to get a specific draft", async () => {
-    // Arrange
-    const expected = 200
-    let param;
-    let actual;
-    
-    // Act
-    await dbQueries.addDraft({})
-    .then((resp) => {
-        param = resp[0]
-    })
-    await supertest(app).get('/api/drafts/' + param)
-    .then((resp) => {
-        actual = resp.statusCode
-    })
-
-     // Assert
-     expect(actual).toBe(expected);
-});
-
 test("should return HTTP 500 if attempting to hit delete endpoint without passing payload", async () => {
     // Arrange
     const expected = 500

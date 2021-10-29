@@ -12,11 +12,11 @@ router.post("/", async (req, res) => {
     try {
     jwt.verify(token, process.env.JWT_KEY); 
 
-    const userKey = shortid.generate()
+    const userkey = shortid.generate()
     
-    dbQueries.addUserKey({ key: userKey })
+    dbQueries.addUserkey({ key: userkey })
     
-    res.status(200).json({userKey: userKey })
+    res.status(200).json({userkey: userkey })
     } catch(err) {
     res.status(403).send(err)        
     }

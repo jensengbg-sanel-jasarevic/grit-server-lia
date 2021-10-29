@@ -18,7 +18,13 @@ router.get("/", (req, res) => {
  // POST mailbox
  router.post("/", async (req, res) => {
     if (req.body.text && req.body.draftId && req.body.filename) {
-    dbQueries.addMailbox({ message: `${req.body.text}`, draftId: `${req.body.draftId}`, sender: `${req.body.sender}`, receiver: `${req.body.receiver}`, filename: `${req.body.filename}` })
+    dbQueries.addMailbox({ 
+        sender: `${req.body.sender}`,
+        receiver: `${req.body.receiver}`, 
+        message: `${req.body.text}`,
+        filename: `${req.body.filename}`,
+        draftId: `${req.body.draftId}`
+     })
     .then(data => { 
          res.status(200).json(data)
         })

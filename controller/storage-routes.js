@@ -1,9 +1,9 @@
 const express = require ("express");
 const dbQueries = require("../model/database-queries")
 const DigitalOceanSpaces = require("../model/object-storage")
+const multer = require("multer") 
 // Middleware for handling multipart/form-data, which is primarily used for uploading files.
 // Multer adds a body object and a file or files object to the request object. In HTML form tag have to include attribute enctype="multipart/form-data".
-const multer = require("multer") 
 
 const storage = multer.memoryStorage() // Storage option for Multer.
 // Multer accepts an options object, 'storage' is one of the options that can be passed.
@@ -13,8 +13,7 @@ const upload = multer({ storage: storage }).single("image")
 const router = express.Router() 
 
 // POST record to sketch table & upload file to cloud storage system 
-// Multer passed as middleware to endpoint. Handled first in this operation.
-router.post("/", upload, async (req, res) => { 
+router.post("/", upload, async (req, res) => { // Multer passed as middleware to endpoint. Handled first in this operation.
     let myFile = req.file.originalname.split(".") 
     const fileType = myFile[myFile.length - 1]
     
@@ -34,7 +33,7 @@ router.post("/", upload, async (req, res) => {
         })
 })
 
-// GET file from 'Space' (download)
+// GET file from a 'Space'
 router.get("/space/:filename", (req, res) => {
     let params = {
         Bucket: process.env.BUCKET_NAME,
@@ -51,7 +50,7 @@ router.get("/space/:filename", (req, res) => {
     });
 })
 
-// GET list of all files in a 'Space'
+// GET all files from a 'Space'
 router.get("/space", (req, res) => {
     let params = {
         Bucket: process.env.BUCKET_NAME
@@ -74,8 +73,8 @@ router.get("/space", (req, res) => {
     });
 })
 
-// GET list of all 'Spaces'
-router.get("/spaces", (req, res) => {
+// GET all 'Spaces'
+router.get("/", (req, res) => {
     DigitalOceanSpaces.s3.listBuckets({}, function(error, data) {
         if (error) {
         res.status(500).send(error)

@@ -6,17 +6,17 @@ const dbQueries = require("../model/database-queries")
 const salt = bcrypt.genSaltSync(10);
 const router = express.Router() 
 
-// POST Registration authentication
+// POST registration (key authentication)
 router.post("/registration", async (req, res) => {
-    const userKey = req.body.userkey
+    const userkey = req.body.userkey
     const username = req.body.username
     const password = req.body.password
     
-    if(userKey && username && password) {
-        let authentication = await dbQueries.findUserKey(userKey)
+    if(userkey && username && password) {
+        let authentication = await dbQueries.findUserkey(userkey)
        
         if(authentication.length > 0 && authentication[0].activated === null) { 
-            await dbQueries.updateUserKey(userKey)
+            await dbQueries.updateUserkey(userkey)
 
             const HASHED_PASSWORD = await bcrypt.hashSync(password, salt)
 
@@ -30,7 +30,7 @@ router.post("/registration", async (req, res) => {
     }       
 })
 
-// POST Login authentication & authorization
+// POST login (authentication & authorization)
 router.post("/login", async (req, res) => {
     let credentials = {
      username: req.body.username,

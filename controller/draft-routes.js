@@ -15,31 +15,13 @@ router.get("/", async (req, res) => {
     });
 })
 
-// GET specific draft
-router.get("/:id", (req, res) => {
-    dbQueries.findDraft(parseInt(req.params.id))
-
-    .then(draft => {
-        if (draft) {
-            res.status(200).json(draft);
-        } else { 
-            res.status(404).json({ message: "Record not found" });
-        }
-    })
-    .catch(error => {
-        res.status(500).json({ message: "Unable to perform operation" });
-    });
-});
-
 // POST record drafts table 
 router.post("/", async (req, res) => {
    await dbQueries.addDraft({ sender: req.body.sender, receiver: req.body.receiver, filename: req.body.filename })
     .then(response => { 
-        console.log(response)
         res.status(201).json({ message: `Record added to draft table #${response}.` })
     })
     .catch(error => { 
-        console.error(error)
         res.status(500).json({ message: "Could not add record to draft table." })
     })
 })

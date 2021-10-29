@@ -18,7 +18,6 @@ router.get("/", (req, res) => {
 // POST order
 router.post("/", async (req, res) => {
     try {
-        await dbQueries.findDraft(req.body.id)
         let orderObj = {
             client: req.body.client,
             draftId: req.body.id,

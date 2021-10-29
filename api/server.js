@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require('cors')
 
-// From 'Routes' directory import code via path to the files
+// Import Javascript code modules from 'controller' directory via path to the files
 const loginRouter = require("../controller/login-routes")
 const storageRouter = require("../controller/storage-routes")
 const keygenRouter = require("../controller/keygen-routes")

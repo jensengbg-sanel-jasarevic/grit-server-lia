@@ -2,11 +2,10 @@ const dbQueries = require("../model/database-queries"); // Database layer testin
 
 test("should return collection of 4 elements after performing 'Read' operations on tables", async () => {
     // Arrange
-    const expected = 4
+    const expected = 3
     let actual = []
     
     // Act
-    await dbQueries.getSketches().then((resp) => { actual.push(resp) })
     await dbQueries.getDrafts().then((resp) => { actual.push(resp) })
     await dbQueries.getOrders().then((resp) => { actual.push(resp) })
     await dbQueries.getMailbox().then((resp) => { actual.push(resp) })
@@ -63,26 +62,6 @@ test("should check if correct message is stored in table", async () => {
     
     // Assert
     expect(actual).toEqual(expected);
-});
-
-test("should verify if table has the correct number of columns", async () => {
-    // Arrange
-    const expected = 2
-    let actual = []
-    
-    // Act
-    await dbQueries.addSketch({});
-    await dbQueries.getSketches()
-    .then((response) => {
-        console.log(response)
-        let record = response[0]
-        for (column in record) {
-            actual.push(column);
-        }  
-    })
-
-    // Assert
-    expect(actual.length).toBe(expected);
 });
 
 test("should check if table has 'draftId' column", async () => {
