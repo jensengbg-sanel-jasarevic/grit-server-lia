@@ -13,20 +13,20 @@ router.post("/registration", async (req, res) => {
     const password = req.body.password
     
     if(userKey && username && password) {
-        let authentication = await dbQueries.findUserKey(userKey)
+        let au = await dbQueries.findUserKey(userKey)
        
-        if(authentication.length > 0 && authentication[0].activated === null) { 
+        if(au.length > 0 && au[0].activated === null) { 
             await dbQueries.updateUserKey(userKey)
 
-            //const HASHED_PASSWORD = await bcrypt.hashSync(password, salt)
+            const HASHED_PASSWORD = await bcrypt.hashSync(password, salt)
 
-            dbQueries.addUser({ name: `${username}`, password: `123`, role: "client" })
+            dbQueries.addUser({ name: `${username}`, password: `${HASHED_PASSWORD}`, role: "client" })
             res.status(201).send('User created.')             
         } else {
-            res.status(200).send('Lacks valid authentication credentials.')
+            res.status(401).send('Lacks valid authentication credentials.')
         }
     } else {
-        res.status(204).json({ message: "Required data values missing from client request." }) 
+        res.status(400).json({ message: "Required data values missing from client request." }) 
     }       
 })
 
