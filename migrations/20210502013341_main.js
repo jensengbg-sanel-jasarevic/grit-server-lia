@@ -41,7 +41,7 @@ exports.up = function(knex) {
 
     .createTable("keys", (tbl) => {
       tbl.increments(); 
-      tbl.integer("key")
+      tbl.text("key")
       tbl.boolean("activated") 
     })
 

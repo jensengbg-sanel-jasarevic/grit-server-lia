@@ -13,7 +13,6 @@ const server = express()
 
 // Middlewares
 server.use(express.json()) 
-server.use(cors({ origin: ['https://vueclient-100.herokuapp.com'], }))
 server.use(cors())
 
 // API Endpoints
