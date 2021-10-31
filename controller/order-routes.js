@@ -26,7 +26,7 @@ router.post("/", async (req, res) => {
         dbQueries.addOrder(orderObj)
         res.status(201).json(orderObj)
     }catch(error) {
-    res.status(404).json({ message: "Requested resource was not found." })
+    res.status(500).json({ message: "Unable to perform operation." })
     }
 })
 

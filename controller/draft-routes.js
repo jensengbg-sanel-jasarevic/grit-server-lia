@@ -17,13 +17,19 @@ router.get("/", async (req, res) => {
 
 // POST record drafts table 
 router.post("/", async (req, res) => {
-   await dbQueries.addDraft({ sender: req.body.sender, receiver: req.body.receiver, filename: req.body.filename })
-    .then(response => { 
-        res.status(201).json({ message: `Record added to draft table #${response}.` })
-    })
-    .catch(error => { 
-        res.status(500).json({ message: "Could not add record to draft table." })
-    })
+    let exists = await dbQueries.findUser(req.body.receiver)
+    
+    if(exists.length < 1) {
+        res.status(404).json({ message: "User not found." })   
+    } 
+    else if(exists.length > 0) {
+        await dbQueries.addDraft({ 
+            sender: req.body.sender,
+            receiver: req.body.receiver,
+            filename: req.body.filename
+            })
+        res.status(201).json({ message: "Record added to draft table.", receiver: req.body.receiver })            
+    }
 })
 
 // PATCH specific draft
