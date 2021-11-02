@@ -1,4 +1,5 @@
 const express = require("express");
+const helmet = require('helmet');
 const cors = require('cors')
 
 // Import Javascript code modules from 'controller' directory via path to the files
@@ -12,6 +13,7 @@ const mailboxRouter = require("../controller/mailbox-routes")
 const server = express() 
 
 // Middlewares
+server.use(helmet()) // Security middleware (runs every time API called).  
 server.use(express.json()) 
 server.use(cors())
 
