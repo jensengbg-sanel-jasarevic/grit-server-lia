@@ -16,24 +16,3 @@ test("should return HTTP 200 when hitting endpoint that gets all orders", async 
      // Assert
      expect(actual).toBe(expected);
 });
-
-test("should return HTTP 201 when hitting post endpoint with valid payload", async () => {
-    // Arrange
-    const expected = 201
-    let draft;
-    let actual;
-        
-    // Act
-    await dbQueries.addDraft({})
-    .then((res) => {
-        draft = res[0]
-    })
-    await supertest(app).post('/api/orders/')
-    .send({ id: draft })
-    .then((resp) => {
-        actual = resp.statusCode
-    })
-
-    // Assert
-    expect(actual).toBe(expected);
-});
