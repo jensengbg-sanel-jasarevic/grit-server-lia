@@ -6,6 +6,7 @@ module.exports = {
     updateUserkey,
     addUser,
     findUser,
+    updateUser,
     addSketch,
     addDraft,
     getDrafts,
@@ -28,7 +29,7 @@ async function findUserkey(userkey) {
 
 async function updateUserkey(userkey) {
     return await db("keys").where({ key: userkey })
-    .update({activated: true})
+    .update({ activated: true })
 }
 
 async function addUser(user) {
@@ -37,6 +38,14 @@ async function addUser(user) {
 
 async function findUser(user) {
     return await db("registrations").where({ name: user })
+}
+
+async function updateUser(user, param) {
+    return await db("registrations").where({ name: user })
+    .update({ active: param })
+    .then(() => {  
+        return findUser(user);
+    });
 }
 
 async function addSketch(sketch) {
@@ -60,7 +69,7 @@ function findDraft(id) {
 async function updateDraft(id, value) {
     return await db("drafts")
         .where({ id })
-        .update({rejected: value})
+        .update({ rejected: value })
         .then(() => {  // Returns the object with id
             return findDraft(id);
         });

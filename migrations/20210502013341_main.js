@@ -50,6 +50,7 @@ exports.up = function(knex) {
       tbl.text("name") 
       tbl.text("password") 
       tbl.text("role") 
+      tbl.boolean("active") 
     })
 
   }
