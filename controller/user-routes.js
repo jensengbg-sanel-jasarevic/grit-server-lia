@@ -16,7 +16,7 @@ router.get("/:user", async (req, res) => {
 
 // PATCH user deactivate
 router.patch("/", async (req, res) => { 
-     await dbQueries.updateUser(req.body.user, false)
+     await dbQueries.updateUser(req.body.user, "inactive")
     .then(updated => {
         res.status(200).json(updated);
     })

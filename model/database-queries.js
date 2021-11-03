@@ -42,7 +42,7 @@ async function findUser(user) {
 
 async function updateUser(user, param) {
     return await db("registrations").where({ name: user })
-    .update({ active: param })
+    .update({ state: param })
     .then(() => {  
         return findUser(user);
     });
