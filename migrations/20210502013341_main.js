@@ -5,7 +5,7 @@
 exports.up = function(knex) {
   // Database schema represents the internal structure of the database. How e.g. tables, columns are organized and related in the database.
     return knex.schema
-    // We pass the table name as the first argument and a callback function as the second argument..
+    // We pass the table name as the first argument and a callback function as the second argument.
     .createTable("sketches", tbl => { // Callback function to modify table's structure using the schema-building commands/methods.
       // To create columns we call methods on the tbl object. Depending on the column we want to create, we call different methods.
       // One column that most tables have is a primary key column. This column is used to keep the record id, and it usually contains an auto incremented integer.
