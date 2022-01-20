@@ -1,11 +1,6 @@
-<b>URL:</b></br>
-https://grit-server-lia.herokuapp.com/</br>
-</br>
-<b>Project setup:</b></br>
-npm install</br>
-</br>
-<b>Run server:</b></br>
-npm run start</br>
-</br>
-<b>Run tests:</b></br>
-npm run test
+#### Web address URL
+https://grit-server-lia.herokuapp.com/
+
+# Project: Grit (backend)
+
+Digital plattform för hantering av försäljning och kommunikation mot kunder för att effektivisera kommunikationen kring beställning av tränings-och matchställ.
