@@ -1,5 +1,5 @@
 <b>URL:</b></br>
-https://nodeserver-100.herokuapp.com/</br>
+https://grit-server-lia.herokuapp.com/</br>
 </br>
 <b>Project setup:</b></br>
 npm install</br>
